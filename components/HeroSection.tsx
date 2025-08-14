@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import ShinyButton from "./ShinyButton";
-import TechStack from "./TechStack";
 
 const HeroSection = () => {
   const router = useRouter();
@@ -72,7 +71,7 @@ const HeroSection = () => {
           transition={{ duration: 0.5, delay: 1.5 }}
           className="mt-6 max-w-2xl mx-auto text-lg text-neutral-600 dark:text-neutral-300"
         >
-          I'm a passionate developer who enjoys building creative, efficient,
+          I&apos;m a passionate developer who enjoys building creative, efficient,
           and scalable solutions
         </motion.p>
 

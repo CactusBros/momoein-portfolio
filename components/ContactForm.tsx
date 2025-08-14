@@ -61,7 +61,7 @@ const ContactForm = () => {
           variants={formVariants}
           className="mt-4 text-lg text-neutral-600 dark:text-neutral-400"
         >
-          I'm always open to new ideas and collaborations. I would love to hear
+          I&apos;m always open to new ideas and collaborations. I would love to hear
           from you!
         </motion.p>
       </div>
