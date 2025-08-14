@@ -1,12 +1,11 @@
 // src/components/Navbar.tsx
-
 "use client";
 
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { Menu, X, Sun, Moon } from "lucide-react";
-import SocialLinks from "./SocialLinks"; // Import SocialLinks
+import SocialLinks from "./SocialLinks";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,15 +40,14 @@ const Navbar = () => {
   return (
     <nav className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm w-full fixed top-0 left-0 z-50 border-b border-gray-200 dark:border-neutral-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Changed to justify-between */}
         <div className="flex items-center justify-between h-16">
-          {/* Left Side: Socials on Mobile, Logo on Desktop */}
-          <div>
-            {/* Mobile Social Links (Horizontal) */}
+          {/* Always show SocialLinks on mobile and Logo on desktop */}
+          <div className="flex items-center">
+            {/* Social Links on mobile, hidden on desktop */}
             <div className="md:hidden">
               <SocialLinks className="flex-row space-x-4" />
             </div>
-            {/* Desktop Logo (Placeholder) */}
+            {/* Logo on desktop, hidden on mobile */}
             <div className="hidden md:block">
               <Link href="/" className="text-xl font-bold">
                 Momoein
@@ -93,7 +91,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu (No longer contains social links) */}
+      {/* Mobile Dropdown Menu */}
       {isOpen && (
         <div className="md:hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">

@@ -15,7 +15,7 @@ interface SocialLinksProps {
 
 const SocialLinks: FC<SocialLinksProps> = ({ className }) => {
   return (
-    <nav className={`fixed bottom-4 left-4 ${className}`}>
+    <nav className={`fixed top-5 left-4 ${className}`}>
       <div className="flex flex-row gap-4 md:flex-col">
         {socialLinks.map((link, index) => (
           <Link href={link.href} key={index} target="_blank">
