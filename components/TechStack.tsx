@@ -37,15 +37,17 @@ const TechStack = () => {
         <h2 className="text-center text-4xl font-bold text-neutral-800 dark:text-neutral-200 mb-12">
           My Tech Stack
         </h2>
-        <div className="space-y-10">
+        {/* 1. Stacks vertically on mobile, becomes a grid on large screens */}
+        <div className="space-y-10 lg:grid lg:grid-cols-4 lg:gap-8 lg:space-y-0">
           {techStackData.map(({ category, icon: CategoryIcon, items }) => (
             <div key={category}>
               <h3 className="flex items-center font-semibold text-xl text-neutral-700 dark:text-neutral-300 mb-5">
                 <CategoryIcon className="w-7 h-7 mr-4 text-neutral-500" />
                 {category}
               </h3>
+              {/* 2. A wrapping row on mobile, becomes a vertical column on large screens */}
               <motion.div
-                className="flex flex-wrap gap-3"
+                className="flex flex-wrap gap-3 lg:flex-col lg:gap-0 lg:space-y-3"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
@@ -55,7 +57,7 @@ const TechStack = () => {
                   <motion.div
                     key={name}
                     variants={pillVariants}
-                    className="flex items-center bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700/50 px-4 py-2 rounded-lg shadow-sm transition-all duration-300 hover:shadow-md hover:scale-105 hover:border-neutral-300 dark:hover:border-neutral-600"
+                    className="flex items-center bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700/50 px-4 py-2 rounded-lg shadow-sm"
                   >
                     {React.cloneElement(icon, {
                       className: [icon.props.className, "w-6 h-6 mr-3"]
