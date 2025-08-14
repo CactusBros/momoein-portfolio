@@ -1,7 +1,35 @@
+"use client";
+
 import React from "react";
+import { motion } from "framer-motion";
 import { techStackData } from "../data/techData"; // Adjust the import path as needed
 
 const TechStack = () => {
+  // Animation variants for the container of the pills
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08, // Time delay between each pill animating in
+      },
+    },
+  };
+
+  // Animation variants for each individual pill
+  const pillVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        damping: 15,
+        stiffness: 200,
+      },
+    },
+  };
+
   return (
     <section
       id="tech-stack"
@@ -18,10 +46,17 @@ const TechStack = () => {
                 <CategoryIcon className="w-7 h-7 mr-4 text-neutral-500" />
                 {category}
               </h3>
-              <div className="flex flex-wrap gap-3">
+              <motion.div
+                className="flex flex-wrap gap-3"
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.4 }} // Animate once when 20% of the element is in view
+              >
                 {items.map(({ name, icon }) => (
-                  <div
+                  <motion.div
                     key={name}
+                    variants={pillVariants}
                     className="flex items-center bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700/50 px-4 py-2 rounded-lg shadow-sm transition-all duration-300 hover:shadow-md hover:scale-105 hover:border-neutral-300 dark:hover:border-neutral-600"
                   >
                     {React.cloneElement(icon, {
@@ -30,9 +65,9 @@ const TechStack = () => {
                     <span className="font-medium text-neutral-800 dark:text-neutral-200">
                       {name}
                     </span>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
           ))}
         </div>

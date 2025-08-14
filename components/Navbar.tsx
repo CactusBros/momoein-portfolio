@@ -19,8 +19,8 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { href: '/projects', label: 'Projects' },
-    { href: '/contact', label: 'Contact' },
+    { href: '#projects', label: 'Projects' },
+    { href: '#contact', label: 'Contact' },
   ];
 
   // This function now safely renders the theme toggle button only on the client.
