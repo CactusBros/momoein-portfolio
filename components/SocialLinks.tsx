@@ -4,8 +4,8 @@ import Link from "next/link";
 import { FC } from "react";
 
 const socialLinks = [
-  { href: "https://github.com/yourusername", icon: Github },
-  { href: "https://linkedin.com/in/yourusername", icon: Linkedin },
+  { href: "https://github.com/momoein", icon: Github },
+  { href: "https://linkedin.com/in/momoein", icon: Linkedin },
   { href: "https://twitter.com/yourusername", icon: Twitter },
 ];
 
