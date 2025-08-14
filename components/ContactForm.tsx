@@ -1,27 +1,72 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, type Variants } from "framer-motion"; // 1. Import Variants type
 import ShinyButton from "./ShinyButton";
+import dynamic from "next/dynamic";
+
+// Disable SSR for Arcaptcha widget
+const ArcaptchaWidget = dynamic(
+  () => import("arcaptcha-react").then((mod) => mod.ArcaptchaWidget),
+  { ssr: false }
+);
 
 const ContactForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("");
+  const [captchaToken, setCaptchaToken] = useState<string | undefined>(undefined);
+  const [isClient, setIsClient] = useState(false);
+  const [siteKey, setSiteKey] = useState<string>("");
+
+  useEffect(() => {
+    setIsClient(true);
+    fetch("/api/captcha/sitekey", { method: "GET"})
+      .then((res) => res.json())
+      .then((data) => {
+        setSiteKey(data.siteKey);
+        console.log("captcha sitekey: ", data.siteKey);
+      }
+    );
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus("Sending...");
-    console.log({ name, email, message });
 
-    setTimeout(() => {
-      setStatus("Message sent successfully!");
+    if (siteKey && !captchaToken) {
+      setStatus("Please complete the captcha.");
+      return;
+    }
+
+    setStatus("Sending...");
+
+    try {
+      if (siteKey) {
+        const res = await fetch("/api/captcha", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            email,
+            message,
+            "arcaptcha-token": captchaToken, // send token to server
+          }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.error || "Something went wrong");
+      }
+    
+      setStatus("Form submitted successfully!");
       setName("");
       setEmail("");
       setMessage("");
-      setTimeout(() => setStatus(""), 3000);
-    }, 1000);
+      setCaptchaToken(undefined);
+    } catch (err: any) {
+      setStatus(err.message);
+    }
   };
 
   // 2. Apply the Variants type
@@ -114,6 +159,17 @@ const ContactForm = () => {
               className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-md shadow-sm focus:outline-none focus:ring-neutral-500 focus:border-neutral-500"
             />
           </motion.div>
+
+          {/* Captcha */}
+          {isClient && siteKey ? (
+            <ArcaptchaWidget
+              site-key={siteKey}
+              callback={(token?: string) => setCaptchaToken(token)}
+              theme="dark"
+              lang="en"
+            />
+          ) : null}
+
           <motion.div
             variants={formVariants}
             className="text-center md:text-left pt-2"
