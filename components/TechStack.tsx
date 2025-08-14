@@ -1,23 +1,21 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
-import { techStackData } from "../data/techData"; // Adjust the import path as needed
+import { motion, type Variants } from "framer-motion";
+import { techStackData } from "../data/techData";
 
 const TechStack = () => {
-  // Animation variants for the container of the pills
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08, // Time delay between each pill animating in
+        staggerChildren: 0.08,
       },
     },
   };
 
-  // Animation variants for each individual pill
-  const pillVariants = {
+  const pillVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
@@ -51,7 +49,7 @@ const TechStack = () => {
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.4 }} // Animate once when 20% of the element is in view
+                viewport={{ once: true, amount: 0.4 }}
               >
                 {items.map(({ name, icon }) => (
                   <motion.div
@@ -60,7 +58,9 @@ const TechStack = () => {
                     className="flex items-center bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700/50 px-4 py-2 rounded-lg shadow-sm transition-all duration-300 hover:shadow-md hover:scale-105 hover:border-neutral-300 dark:hover:border-neutral-600"
                   >
                     {React.cloneElement(icon, {
-                      className: `${icon.props.className} w-6 h-6 mr-3`,
+                      className: [icon.props.className, "w-6 h-6 mr-3"]
+                        .filter(Boolean)
+                        .join(" "),
                     })}
                     <span className="font-medium text-neutral-800 dark:text-neutral-200">
                       {name}

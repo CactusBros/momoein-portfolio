@@ -1,23 +1,23 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion"; // 1. Import Variants type
 import ProjectCard from "./ProjectCard";
-import { projectsData } from "../data/projectData"; // Adjust the import path as needed
+import { projectsData } from "../data/projectData";
 
 const ProjectsSection = () => {
-  // Animation variants for the container to orchestrate the children's animation
-  const containerVariants = {
+  // 2. Apply the Variants type
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2, // Time delay between each card animating in
+        staggerChildren: 0.2,
       },
     },
   };
 
-  // Animation variants for each individual project card
-  const cardVariants = {
+  // 3. Apply the Variants type
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,

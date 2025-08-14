@@ -1,26 +1,26 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion"; // 1. Import Variants type
 import ShinyButton from "./ShinyButton";
 
 const HeroSection = () => {
   const router = useRouter();
 
-  // Animation variants for the container to orchestrate the children's animation
-  const containerVariants = {
+  // 2. Apply the Variants type
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.04, // Time delay between each character animating in
+        staggerChildren: 0.04,
         delayChildren: 0.2,
       },
     },
   };
 
-  // Animation variants for each individual character
-  const charVariants = {
+  // 3. Apply the Variants type
+  const charVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
@@ -33,7 +33,6 @@ const HeroSection = () => {
     },
   };
 
-  // The text part of the title, without the emoji
   const titleText = "Hi, I'm Momoein";
 
   return (
@@ -45,17 +44,15 @@ const HeroSection = () => {
           animate="visible"
           className="text-5xl sm:text-6xl md:text-8xl font-extrabold text-neutral-900 dark:text-neutral-100 leading-tight"
         >
-          {/* Animate the text part */}
           {titleText.split("").map((char, index) => (
             <motion.span
               key={index}
               variants={charVariants}
-              className="inline-block" // Necessary for transforms
+              className="inline-block"
             >
               {char === " " ? "\u00A0" : char}
             </motion.span>
           ))}
-          {/* Animate the emoji separately after the text */}
           <motion.span
             initial={{ opacity: 0, scale: 0.5, rotate: -30 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -71,8 +68,8 @@ const HeroSection = () => {
           transition={{ duration: 0.5, delay: 1.5 }}
           className="mt-6 max-w-2xl mx-auto text-lg text-neutral-600 dark:text-neutral-300"
         >
-          I&apos;m a passionate developer who enjoys building creative, efficient,
-          and scalable solutions
+          I&apos;m a passionate developer who enjoys building creative,
+          efficient, and scalable solutions
         </motion.p>
 
         <motion.div

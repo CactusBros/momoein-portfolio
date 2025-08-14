@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion"; // 1. Import Variants type
 import ShinyButton from "./ShinyButton";
 
 const ContactForm = () => {
@@ -13,22 +13,19 @@ const ContactForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("Sending...");
-
-    // In a real application, you would send this data to an API endpoint.
     console.log({ name, email, message });
 
-    // Simulate an API call
     setTimeout(() => {
       setStatus("Message sent successfully!");
       setName("");
       setEmail("");
       setMessage("");
-      setTimeout(() => setStatus(""), 3000); // Clear status after 3 seconds
+      setTimeout(() => setStatus(""), 3000);
     }, 1000);
   };
 
-  // Animation variants for the form elements
-  const formVariants = {
+  // 2. Apply the Variants type
+  const formVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
@@ -61,8 +58,8 @@ const ContactForm = () => {
           variants={formVariants}
           className="mt-4 text-lg text-neutral-600 dark:text-neutral-400"
         >
-          I&apos;m always open to new ideas and collaborations. I would love to hear
-          from you!
+          I&apos;m always open to new ideas and collaborations. I would love to
+          hear from you!
         </motion.p>
       </div>
 

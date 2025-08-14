@@ -1,4 +1,4 @@
-import React from "react";
+import { type ReactElement, type ElementType } from "react";
 import { FaTerminal, FaGitAlt, FaCloud } from "react-icons/fa";
 import {
   SiGo,
@@ -14,7 +14,19 @@ import {
 } from "react-icons/si";
 import { Code2, Wrench, CloudCog, BrainCircuit } from "lucide-react";
 
-export const techStackData = [
+// The fix is in this interface
+interface TechItem {
+  name: string;
+  icon: ReactElement<{ className?: string }>;
+}
+
+export interface TechCategory {
+  category: string;
+  icon: ElementType;
+  items: TechItem[];
+}
+
+export const techStackData: TechCategory[] = [
   {
     category: "Languages",
     icon: Code2,
