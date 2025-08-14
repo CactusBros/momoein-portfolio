@@ -64,8 +64,12 @@ const ContactForm = () => {
       setEmail("");
       setMessage("");
       setCaptchaToken(undefined);
-    } catch (err: any) {
-      setStatus(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setStatus(err.message);
+      } else {
+        setStatus("Something went wrong");
+      }
     }
   };
 
