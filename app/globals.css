@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+/* 1. This is the crucial line you found. It tells Tailwind to use the .dark class. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 2. Define variables for light mode (default) */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* 3. Define variables for dark mode */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+/* 4. Map your variables to Tailwind's theme */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+/* 5. Apply the styles using Tailwind's theme() function */
+body {
+  background-color: theme(colors.background);
+  color: theme(colors.foreground);
+}
