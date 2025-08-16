@@ -15,8 +15,8 @@ interface SocialLinksProps {
 
 const SocialLinks: FC<SocialLinksProps> = ({ className }) => {
   return (
-    <nav className={`fixed top-5 left-4 ${className}`}>
-      <div className="flex flex-row gap-4 md:flex-col">
+    <nav className={`fixed top-5 md:bottom-4 left-4 md:top-auto ${className}`}>
+      <div className="flex flex-row md:flex-col gap-4">
         {socialLinks.map((link, index) => (
           <Link href={link.href} key={index} target="_blank">
             <link.icon className="w-6 h-6 text-neutral-500 hover:text-black dark:hover:text-white transition-colors" />

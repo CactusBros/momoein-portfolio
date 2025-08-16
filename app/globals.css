@@ -7,12 +7,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --shine-color: rgba(255, 215, 0, 0.15);
 }
 
 /* 3. Define variables for dark mode */
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
+  --shine-color: rgba(29, 78, 216, 0.15);
 }
 
 /* 4. Map your variables to Tailwind's theme */
