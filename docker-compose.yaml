@@ -1,0 +1,14 @@
+services:
+  app:
+    build: .
+    container_name: momoein-portfolio
+    ports:
+      - "11001:3000"
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: always
