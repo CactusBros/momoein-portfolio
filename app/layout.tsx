@@ -8,7 +8,7 @@ import Footer from "../components/Footer";
 import "./globals.css";
 
 export const metadata = {
-  title: "My Awesome Portfolio",
+  title: "Momoein",
   description: "Welcome to my personal portfolio website.",
 };
 
